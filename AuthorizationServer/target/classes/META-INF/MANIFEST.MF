@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: AuthorizationServer
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: bh
+Implementation-Vendor-Id: AuthorizationServer
+Build-Jdk: 1.8.0_72
+Implementation-URL: http://projects.spring.io/spring-boot/Authorizatio
+ nServer/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

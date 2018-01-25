@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    stream:
+      defaultBinder: defaultRabbit
+      bindings:
+        input:
+          destination: mqTestDefault    # 目的，对应 MQ 是 exchange， 生成临时队列        
+        inputOrder:
+          destination: mqTestOrder
+          group: orderReceiveGroup1     # 具体分组 对应 MQ 是 队列名称 并且持久化队列
+        inputProductAdd:
+          destination: mqTestProduct
+          group: addProductHandler      # 拥有 group 默认会持久化队列
+      rabbit:
+        bindings:
+          inputProductAdd:
+            consumer: #消息消费者
+              bindingRoutingKey: addProduct.*  # 指定当前Exchange下，什么样的RoutingKey会被下派到当前绑定的Queue中
+      binders:
+      
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+             rabbitmq:
+              host: 192.163.20.86
+              username: bh
+              password: bh
+              #virtual-host: dev
+  application:
+    name: SpringCloud_Stream_RabbitMQ_InPut
+#  rabbitmq:                  # 默认的 mq的配置时候，上述的配置方式，可以支持多个 broker
+#    virtual-host: dev
+#    host: 192.163.20.86
+#    username: bh
+#    password: bh

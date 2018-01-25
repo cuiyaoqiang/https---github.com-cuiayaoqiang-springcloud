@@ -1,0 +1,18 @@
+server:
+  port: 8082  #配置端口
+  context-path: /BasicMicroService   #配置上下文路径
+spring: 
+  datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     url: jdbc:mysql://192.163.20.94:3306/basicmicroservice
+
+     username: root
+     password: BHroot_01
+  jpa: 
+     hibernate:
+        ddl-auto: update
+     show-sql: true 
+
+url: 
+  url: http://192.163.20.79:8081
+  port: 8082

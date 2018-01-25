@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: microservice-user
+server:
+  port: 8888
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: false

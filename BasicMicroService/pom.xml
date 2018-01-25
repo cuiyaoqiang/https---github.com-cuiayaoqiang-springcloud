@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>server</groupId>
+	<artifactId>BasicMicroService</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>BasicMicroService</name>
+	<description></description>
+
+<!--  <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+		<relativePath/>
+	</parent> -->	
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.5.RELEASE</version><!-- 注意不能使用1.5.X -->
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	
+	
+	
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	
+
+	<dependencies>
+	<!-- <dependency>
+        	 <groupId>org.springframework.boot</groupId>
+			核心 POM，包含自动配置支持、日志库和对 YAML 配置文件的支持。
+         	<artifactId>spring-boot-starter</artifactId>
+    	 </dependency>   -->	
+	 <dependency>
+         <groupId>org.springframework.security.oauth</groupId>
+         <artifactId>spring-security-oauth2</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-jwt</artifactId>
+      </dependency>
+       <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-databind</artifactId>
+         <scope>compile</scope>
+       </dependency>
+        <dependency>
+         <groupId>org.bitbucket.b_c</groupId>
+         <artifactId>jose4j</artifactId>
+         <version>0.5.1</version>
+      </dependency>
+      
+           
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		
+		 <!-- 数据库持久化标准  -->
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        
+        <dependency>
+        	<groupId>mysql</groupId>
+        	<artifactId>mysql-connector-java</artifactId>
+        </dependency>
+		
+		<!-- http   -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.5</version>
+		</dependency>
+		
+		<!-- json -->
+        <dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>server.BasicMicroServiceApplication</mainClass>
+						</manifest>
+					</archive>
+					<excludes>    
+						<exclude>${project.basedir}/xml/*</exclude>    
+					</excludes> 
+				</configuration>
+			</plugin>
+			<!-- The configuration of maven-assembly-plugin -->    
+        <plugin>    
+            <groupId>org.apache.maven.plugins</groupId>    
+            <artifactId>maven-assembly-plugin</artifactId>    
+            <version>2.4</version>    
+            <!-- The configuration of the plugin -->    
+            <configuration>    
+                <!-- Specifies the configuration file of the assembly plugin -->    
+                <descriptors>    
+                    <descriptor>conf/package.xml</descriptor>    
+                </descriptors>    
+            </configuration>    
+            <executions>    
+                <execution>    
+                    <id>make-assembly</id>    
+                    <phase>package</phase>    
+                    <goals>    
+                        <goal>single</goal>    
+                    </goals>    
+                </execution>    
+            </executions>    
+        </plugin>     
+		</plugins>
+	</build>
+
+
+</project>

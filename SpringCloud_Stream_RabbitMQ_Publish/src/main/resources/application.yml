@@ -1,0 +1,38 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    stream:
+      defaultBinder: defaultRabbit
+      bindings:
+        output:
+          destination: mqTestDefault
+          contentType: text/plain
+          binder: defaultRabbit
+        outputOrder:
+          destination: mqTestOrder
+#          contentType: text/plain      # 实体 json string 在传递的类型装换 查看 http://docs.spring.io/spring-cloud-stream/docs/Chelsea.SR2/reference/htmlsingle/index.html#mime-types-and-java-types
+        outputProductAdd:
+          destination: mqTestProduct
+      rabbit:
+        bindings:
+          outputProductAdd:
+            producer: #消息生产者
+              routing-key-expression: '''addProduct.*'''  # 指定当前消息被谁接受
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+             rabbitmq:
+              host: 192.163.20.86
+              username: bh
+              password: bh
+              #virtual-host: dev
+  application:
+    name: SpringCloud_Stream_RabbitMQ_Publish
+#  rabbitmq:                  # 默认的 mq的配置时候，上述的配置方式，可以支持多个 broker
+#    virtual-host: dev
+#    host: 192.163.20.86
+#    username: bh
+#    password: bh
